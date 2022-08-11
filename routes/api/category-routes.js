@@ -34,20 +34,15 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
   // update a category by its `id` value
-  Category.update(
-  {
-    category_name: req.params.category_name,
-  },
+  Category.update(req.body,
   {
     where:{
       id: req.params.id,
     },
   }) 
-  .then((updatedCategory) => {
+  .then((updatedCategory) => res.json(updatedCategory))
     // Sends the updated book as a json response
-    res.json(updatedCategory);
-  })
-  .catch((err) => res.json(err));
+  .catch((err) => res.status(400).json(err));
 });
 
 router.delete('/:id', (req, res) => {
