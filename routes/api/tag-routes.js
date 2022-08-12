@@ -19,10 +19,7 @@ router.get('/:id', (req, res) => {
       where:{
         id: req.params.id
       },
-      include: [Product,{
-        model: Tag,
-        through: ProductTag
-      }],
+      include: [Tag],
     },
   ).then((tagDate)=> res.json(tagDate));
   // be sure to include its associated Product data
@@ -30,6 +27,7 @@ router.get('/:id', (req, res) => {
 // create new tag
 router.post('/', (req, res) => {
   // create a new tag
+  Tag.create(req.json())
 });
 // update tag
 router.put('/:id', (req, res) => {
